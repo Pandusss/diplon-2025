@@ -1,0 +1,8 @@
+{
+  "url": "http://localhost:5000",  // или порт, где ты запускаешь сайт
+  "name": "Ellipsis Local",
+  "iconUrl": "http://localhost:5000/static/icon.png",
+  "termsOfUseUrl": "http://localhost:5000/terms",
+  "privacyPolicyUrl": "http://localhost:5000/privacy",
+  "network": "testnet"
+}

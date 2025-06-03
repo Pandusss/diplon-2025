@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %} Success {% endblock %}
+
+{% block content %}
+
+<!----------------  flashed messages and notifications  ---------------->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="notification is-danger">{{msg}}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<hr>
+
+<!----------------  Success message  ---------------->
+<section class="section">
+    <div class="container">
+        <div class="block">
+            <h1 class="title has-text-centered">Спасибо!</h1>
+        </div>
+        <div class="block">
+            <p class="subtitle has-text-centered">Ваш заказ был размещен</p>
+        </div>
+
+        <!----------------  Link to homepage  ---------------->
+        <div class="block">
+            <p class="subtitle has-text-centered"><a href="{{ url_for('home') }}">Вернуться к ellipsis.com</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}

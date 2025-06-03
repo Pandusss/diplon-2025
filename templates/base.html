@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.1/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+    
+    <title>ellipsis |{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <!---------------------  Header and navbar  ---------------------->
+    <header class="header">
+        <nav class="navbar is-spaced">
+
+            <!---------------------  navbar ellipsis logo  --------------------->   
+            <div class="navbar-brand navbar-logo">
+                <a href="/" class="navbar-item is-size-2" style="font-family: Georgia; color: rgb(72, 199, 116); display: flex; align-items: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="currentColor" viewBox="0 0 736 702">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M346.065 1.49994C337.105 3.98594 331.067 8.82594 328.156 15.8519C326.653 19.4809 327.818 19.192 305.065 21.577C232.005 29.232 187.247 46.0679 154.923 78.0529C134.493 98.2679 122.054 120.98 112.581 155.363L110.985 161.154L107.775 158.56C83.936 139.294 58.523 123.976 42.216 119.041C33.807 116.496 27.545 116.76 21.383 119.919C16.534 122.406 13.934 125.275 10.735 131.67C7.02996 139.078 4.57996 149.467 1.56096 170.572C0.195965 180.115 -0.16004 222.681 0.999959 237.775C4.75296 286.646 18.507 331.245 39.807 363.617L45.759 372.662L41.906 384.423C33.122 411.239 29.615 438.334 30.368 473.572C31.023 504.244 33.338 519.211 41.274 544.072C56.836 592.827 93.216 634.413 141.73 658.903C202.936 689.8 303.252 705.227 409.426 700.072C557.13 692.9 646.79 650.607 686.083 569.572C699.955 540.962 706.591 512.162 707.741 475.572C708.873 439.572 704.243 407.155 694.012 379.454L691.014 371.336L695.56 364.454C714.161 336.293 727.997 296.068 733.755 253.406C736.272 234.758 736.281 181.416 733.77 164.807C730.413 142.6 725.293 128.991 717.92 122.68C711.172 116.904 704.678 115.826 693.709 118.66C681.866 121.72 657.779 136.015 636.692 152.498C631.363 156.664 626.792 160.072 626.534 160.072C626.276 160.072 626.065 159.39 626.065 158.557C626.065 155.098 615.671 125.834 611.152 116.572C593.841 81.0899 562.328 55.2849 516.565 39.1209C496.015 31.8629 460.797 24.7619 428.065 21.2769L411.565 19.521L408.755 14.3029C405.247 7.78895 399.339 3.58395 390.895 1.59395C382.922 -0.286051 352.727 -0.349061 346.065 1.49994ZM333.565 39.1859C285.015 43.2609 249.776 49.7809 223.565 59.5379C211.418 64.0589 192.885 73.5979 184.187 79.8049C153.796 101.491 135.771 134.034 126.572 183.827C123.714 199.297 112.791 285.688 113.551 286.813C113.64 286.945 118.939 284.342 125.327 281.027C193.675 245.558 276.008 229.395 378.065 231.414C407.576 231.997 436.045 233.744 454.565 236.106C514.996 243.815 567.998 259.294 611.803 282.027C618.191 285.342 623.599 287.871 623.822 287.648C624.594 286.876 616.631 217.459 613.432 197.072C607.972 162.275 598.232 132.765 586.2 114.572C564.159 81.2449 528.192 60.232 473.447 48.698C456.789 45.189 429.674 41.3499 409.065 39.5839C390.308 37.9759 350.485 37.7659 333.565 39.1859ZM364.391 70.1709C360.017 71.4369 357.728 74.1309 344.932 93.0719C338.802 102.147 325.143 122.172 314.58 137.572C304.018 152.972 293.454 168.402 291.106 171.86C285.519 180.091 284.587 184.204 287.051 189.773C288.16 192.28 290.288 194.847 292.247 196.042C295.497 198.023 297.053 198.065 368.414 198.068C449.113 198.072 445.89 198.328 450.049 191.598C452.39 187.81 452.623 183.342 450.718 178.79C449.69 176.334 390.494 87.0069 382.161 75.3369C380.177 72.5569 373.252 69.0419 369.999 69.1619C368.66 69.2119 366.137 69.6659 364.391 70.1709ZM348.565 124.436C342.515 133.311 331.831 149.009 324.823 159.322L312.081 178.072H335.417H358.752L359.46 143.456C359.849 124.418 360.032 108.719 359.866 108.57C359.7 108.421 354.615 115.561 348.565 124.436ZM379.107 143.572L379.084 178.072H402.633C421.204 178.072 426.025 177.808 425.437 176.822C422.988 172.716 379.868 109.072 379.535 109.072C379.312 109.072 379.119 124.597 379.107 143.572ZM696.366 139.48C684.695 143.817 663.021 157.872 643.702 173.633L631.839 183.311L632.522 188.442C636.623 219.243 643.091 275.539 644.629 293.816L645.322 302.06L653.649 309.619C658.229 313.777 664.083 319.968 666.658 323.376C671.105 329.26 678.019 342.163 679.44 347.226C680.092 349.551 680.112 349.554 681.704 347.572C682.587 346.472 686.375 339.272 690.121 331.572C706.169 298.586 714.516 260.831 715.765 215.572C716.407 192.322 715.177 173.558 711.963 157.572C709.78 146.719 705.95 137.041 703.87 137.124C703.152 137.153 699.776 138.213 696.366 139.48ZM29.144 141.182C24.402 148.98 21.187 170.642 20.403 200.072C19.372 238.797 23.938 272.224 34.743 305.072C38.888 317.672 47.839 337.571 53.343 346.424L55.738 350.275L57.007 346.924C63.33 330.219 68.023 323.192 81.39 310.41L91.678 300.572L92.954 289.072C96.732 255.005 102.347 207.974 103.986 196.669L105.856 183.767L102.777 181.169C79.202 161.278 42.101 138.072 33.873 138.072C31.77 138.072 30.546 138.877 29.144 141.182ZM342.565 251.75C249.481 254.51 166.112 276.825 110.119 313.969C99.386 321.089 85.971 333.736 83.619 338.953C81.865 342.841 81.869 343.052 83.74 346.264C86.394 350.819 91.432 352.394 101.315 351.759C109.457 351.236 118.65 348.316 172.565 329.125C211.203 315.372 239.51 307.785 273.674 302.026C300.861 297.443 319.624 295.9 354.935 295.343C439.083 294.015 490.38 303.462 585.575 337.82C617.286 349.264 629.742 352.484 639.807 351.838C648.022 351.311 651.88 349.292 653.53 344.657C657.778 332.726 619.367 305.69 570.548 286.249C518.808 265.645 463.283 255.021 392.065 252.097C368.847 251.144 364.136 251.111 342.565 251.75ZM333.065 316.115C303.883 317.712 273.154 322.326 243.217 329.604C218.377 335.644 203.895 340.173 161.186 355.261C141.177 362.329 121.377 369.029 117.186 370.149C101.728 374.282 88.812 373.675 78.077 368.313C75.059 366.805 72.314 365.444 71.976 365.288C70.053 364.399 59.526 393.836 56.076 409.749C51.244 432.043 48.861 463.523 50.51 483.274L51.236 491.975L55.401 492.558C61.461 493.405 163.581 501.777 183.565 503.065C192.915 503.667 202.228 504.601 204.261 505.14C211.081 506.948 213.907 513.609 210.582 520.038C207.859 525.305 206.078 525.384 165.018 522.066C101.37 516.923 78.911 515.038 69.565 514.054C64.615 513.533 59.151 513.099 57.424 513.089L54.282 513.072L56.125 521.322C58.599 532.402 61.429 541.353 65.634 551.398L69.132 559.754L78.848 558.394C84.193 557.647 100.49 555.478 115.065 553.576C129.64 551.673 154.84 548.308 171.065 546.097C187.29 543.886 201.837 542.076 203.392 542.075C207.627 542.071 212.065 546.942 212.065 551.595C212.065 554.414 211.306 556.026 208.815 558.504C204.828 562.468 211.091 561.442 107.065 575.18C93.59 576.96 82.223 578.703 81.805 579.054C80.867 579.842 89.947 592.09 98.644 601.769C130.52 637.244 189.652 662.305 269.065 673.997C302.952 678.986 325.668 680.468 368.065 680.456C405.918 680.446 421.492 679.628 452.565 676.019C551.288 664.552 616.273 635.225 652.786 585.66C655.182 582.409 656.787 579.425 656.353 579.031C655.92 578.636 649.265 577.549 641.565 576.614C625.22 574.629 550.185 564.673 538.712 562.966C528.835 561.497 526.083 559.412 525.342 552.837C524.867 548.624 525.113 547.87 527.863 545.12C529.54 543.443 531.761 542.072 532.799 542.072C533.837 542.072 541.184 542.977 549.126 544.083C571.619 547.216 597.734 550.646 632.565 555.044C650.165 557.265 665.543 559.306 666.739 559.578C668.689 560.021 669.339 558.983 673.04 549.516C677.22 538.827 683.891 514.565 682.918 513.592C682.627 513.301 666.454 514.385 646.977 516.002C532.153 525.532 533.082 525.474 530.193 523.329C525.911 520.15 524.516 516.854 525.615 512.516C527.275 505.958 529.553 505.086 549.163 503.5C558.734 502.726 580.29 500.981 597.065 499.623C613.84 498.266 640.39 496.165 656.065 494.956C676.302 493.394 684.999 492.358 686.063 491.381C687.314 490.231 687.559 486.028 687.55 465.789C687.538 440.082 686.527 430.624 681.536 409.572C677.548 392.754 667.289 365.072 665.043 365.072C664.644 365.072 662.345 366.174 659.935 367.521C654.136 370.762 644.985 373.072 637.943 373.072C626.003 373.072 613.486 369.474 558.19 350.149C478.102 322.159 410.199 311.894 333.065 316.115ZM169.776 385.567C143.901 389.79 114.381 400.696 107.934 408.414C105.053 411.863 105.484 418.154 108.815 421.273C113.731 425.875 115.016 425.735 128.321 419.151C139.724 413.508 165.31 404.983 166.693 406.366C166.987 406.66 166.676 407.931 166.002 409.19C161.767 417.102 160.758 434.693 163.949 444.947C166.504 453.156 169.951 458.756 175.839 464.264C198.428 485.394 233.982 476.692 245.102 447.311C248.002 439.649 248.736 427.225 246.68 420.619C245.832 417.894 245.249 415.555 245.384 415.42C245.518 415.285 249.381 417.289 253.968 419.873C264.872 426.017 277.143 435.959 283.833 444.072C286.782 447.647 290.031 451.585 291.054 452.822C293.848 456.202 299.397 455.893 303.142 452.149C309.386 445.905 305.853 437.592 290.569 422.572C273.71 406.003 250.31 393.366 224.565 386.927C213.805 384.236 182.666 383.463 169.776 385.567ZM523.7 385.172C501.794 388.371 476.901 398.753 459.256 412.049C448.563 420.106 436.425 433.044 433.439 439.567C431.076 444.728 431.053 445.002 432.655 449.006C434.435 453.454 436.506 455.072 440.417 455.072C444.613 455.072 445.791 454.157 452.521 445.663C460.977 434.994 472.164 425.948 485.883 418.688C488.807 417.14 491.427 416.101 491.705 416.379C491.983 416.657 491.73 418.614 491.143 420.728C488.698 429.533 490.319 442.42 495.164 452.701C498.958 460.753 508.684 469.985 516.748 473.19C524.935 476.443 540.093 476.494 548.065 473.294C559.155 468.842 568.92 459.06 573.243 448.072C574.856 443.972 575.507 439.773 575.803 431.572C576.193 420.754 575.537 417.069 571.557 407.71C570.846 406.039 571.114 405.917 574.165 406.528C581.971 408.09 600.35 414.634 611.288 419.745C623.753 425.571 625.468 425.761 629.8 421.797C633.399 418.503 633.758 413.718 630.747 409.168C625.294 400.927 591.802 388.479 566.156 385.16C556.476 383.907 532.314 383.914 523.7 385.172ZM212.02 414.12C206.541 419.985 207.212 432.494 213.279 437.599C216.736 440.508 217.827 440.628 220.948 438.441C229.624 432.364 226.188 411.072 216.532 411.072C215.616 411.072 213.586 412.444 212.02 414.12ZM517.069 413.914C513.634 417.349 511.651 424.078 512.502 429.405C513.362 434.78 514.6 436.78 518.229 438.657C521.138 440.161 521.498 440.142 523.949 438.346C531.539 432.786 532.126 417.73 524.948 412.703C521.709 410.434 520.339 410.644 517.069 413.914ZM353.565 475.002C334.489 478.145 324.046 485.323 324.074 495.272C324.08 497.087 325.375 500.822 326.952 503.573C330.544 509.834 343.439 522.245 352.322 527.99L359.065 532.35V543.023V553.695L348.315 560.768C342.402 564.657 333.106 570.255 327.657 573.206C314.632 580.26 312.096 584.119 315.613 591.532C317.193 594.862 320.594 597.072 324.137 597.072C327.382 597.072 347.445 586.473 363.356 576.352L370.147 572.033L373.356 574.449C382.285 581.173 411.166 597.072 414.451 597.072C417.05 597.072 421.877 594.292 423.035 592.127C424.55 589.298 424.289 583.837 422.519 581.31C421.669 580.096 418.856 577.908 416.269 576.449C401.982 568.389 396.694 565.229 388.315 559.742L379.065 553.686V543.055V532.425L386.175 527.567C396.602 520.442 408.328 509.011 411.58 502.799C413.827 498.509 414.229 496.762 413.665 493.756C412.277 486.356 404.079 480.021 391.511 476.635C384.63 474.781 361.06 473.767 353.565 475.002Z" fill="#48C774"/>
+                    </svg>
+                    <span style="margin-left: 8px;">ellipsis</span>
+                </a>
+            </div>
+
+            <!---------------------  navbar search field  --------------------->
+            <div class="navbar-menu" id="main-navbar">
+                <div class="navbar-start">
+                    <div class="navbar-item">
+                        <div class="field">
+                            <div class="control has-icons-right">
+                                <form method="get" action="{{ url_for('search_products') }}">
+                                    <input type="text" class="input is-medium is-rounded"
+                                        placeholder="Поиск..." name="query">
+                                    <span class="icon is-small is-right has-text-dark">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                            <div id="ton-connect" style="min-width:180px;"></div>
+                        </div> 
+                    {% if "user" in session %}
+                        <!---------------------  navbar icons   --------------------->
+                        <div class="navbar-item">
+                            <span class="icon">
+                                <i class="fas fa-heart"></i>
+                            </span>
+                        </div>
+                    <div class="navbar-item">
+                        <a href="{{ url_for('my_chats') }}" class="icon" style="position: relative; color: inherit; text-decoration: none;">
+                            <i class="fas fa-bell"></i>
+                            {% if unread_chats > 0 %}
+                                <span style="position:absolute; top:-5px; right:-8px; background:red; color:white; border-radius:50%; font-size:12px; padding:2px 6px;">
+                                    {{ unread_chats }}
+                                </span>
+                            {% endif %}
+                        </a>
+                    </div>
+
+
+                        <!------------------  dropdown user menu   ------------------->
+                        <div class="dropdown is-hoverable is-right navbar-item">
+                            <div class="dropdown-trigger">
+                                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                                    <span>Вы</span>
+                                    <span class="icon is-small">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                                <div class="dropdown-content">
+                                    <div class="dropdown-item">
+                                        <span class="icon-text">
+                                            <span class="icon">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                            <span>{{ session['user']['full_name'] }}</span>
+                                            <p>
+                                                <a class="has-text-dark" href="{{ url_for('my_profile') }}">Просмотреть свой профиль</a>
+                                            </p>
+                                        </span>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <span class="icon-text">
+                                            <span class="icon">
+                                                <i class="fas fa-gift"></i>
+                                            </span>
+                                            <span>Баланс карты подарков: $0.00</span>
+                                        </span>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <span class="icon-text">
+                                            <span class="icon">
+                                                <i class="fas fa-comment-alt"></i>
+                                            </span>
+                                            <span>
+                                                <a class="has-text-dark" href="{{ url_for('my_chats') }}">Чаты</a>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <span class="icon-text">
+                                            <span class="icon">
+                                                <i class="fas fa-clipboard"></i>
+                                            </span>
+                                            <span>
+                                                <a class="has-text-dark" href="{{ url_for('my_purchases') }}">Покупки и отзывы</a>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <span class="icon-text">
+                                            <span class="icon">
+                                                <i class="fas fa-cog"></i>
+                                            </span>
+                                            <span>Настройки аккаунта</span>
+                                        </span>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <span class="icon-text">
+                                            <span class="icon">
+                                                <i class="fas fa-store"></i>
+                                            </span>
+                                            <span>Продать на ellipsis</span>
+                                        </span>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <span class="icon-text">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    {% else %}
+                                          
+                     {% endif %}
+
+                    <!---------------------  navbar cart   --------------------->
+                    <a class="has-text-dark has-text-weight-semibold navbar-item" href="{{ url_for('view_cart') }}">
+                        {% if 'cart' in session and session['cart']|length > 0 %}
+                            <i class="fas fa-cart-plus"></i>
+                        {% else %}
+                            <i class="fas fa-shopping-cart"></i>
+                        {% endif %}
+                    </a>
+
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!---------  extends to other html pages from here  ------------>
+    {% block content %}{% endblock %}
+
+    <!---------------------  footer menu  --------------------->
+    <div class="section has-background-dark">
+        <div class="columns">
+            <div class="column menu">
+                <p class="menu-label has-text-white">Магазин</p>
+                <ul class="menu-list">
+                    <li><a class="has-text-white">Подарочные карты</a></li>
+                    <li><a class="has-text-white">ellipsis блог</a></li>
+                </ul>
+            </div>
+            <div class="column menu">
+                <p class="menu-label has-text-white">Продать</p>
+                <ul class="menu-list">
+                    <li>
+                        <a class="has-text-white" href="{{ url_for('my_profile') }}">Продать на ellipsis</a>
+                    </li>
+                    <li><a class="has-text-white">Команда</a></li>
+                    <li><a class="has-text-white">Форум</a></li>
+                    <li><a class="has-text-white">Партнерство</a></li>
+                </ul>
+            </div>
+            <div class="column menu">
+                <p class="menu-label has-text-white">О нас</p>
+                <ul class="menu-list">
+                    <li><a class="has-text-white">ellipsis, Inc.</a></li>
+                    <li><a class="has-text-white">Политика</a></li>
+                    <li><a class="has-text-white">Инвесторы</a></li>
+                    <li><a class="has-text-white">Карьера</a></li>
+                    <li><a class="has-text-white">Новости</a></li>
+                </ul>
+            </div>
+            <div class="column menu">
+                <p class="menu-label has-text-white">Помощь</p>
+                <ul class="menu-list">
+                    <li><a class="has-text-white">Центр помощи</a></li>
+                    <li><a class="has-text-white">Доверие и безопасность</a></li>
+                    <li><a class="has-text-white">Настройки конфиденциальности</a></li>
+                </ul>
+                <!---------------------  Social icons   --------------------->
+                <span class="icon is-medium has-text-white">
+                    <i class="fab fa-instagram"></i>
+                </span>
+                <span class="icon is-medium has-text-white">
+                    <i class="fab fa-facebook-square"></i>
+                </span>
+                <span class="icon is-medium has-text-white">
+                    <i class="fab fa-pinterest"></i>
+                </span>
+                <span class="icon is-medium has-text-white">
+                    <i class="fab fa-twitter"></i>
+                </span>
+                <span class="icon is-medium has-text-white">
+                    <i class="fab fa-youtube"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!---------------------  page footer   --------------------->
+    <footer class="footer has-background-black">
+        <!-- Left side -->
+        <div class="level-left">
+            <div class="level-item">
+                <p class="has-text-white">
+                    &#x1F1F3;&#x1F1F1; The Netherlands |
+                </p>
+            </div>
+            <div class="level-item">
+                <p class="has-text-white">
+                    English (US) |
+                </p>
+            </div>
+            <div class="level-item">
+                <p class="has-text-white">
+                    $(TON)
+                </p>
+            </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="level-right">
+            <p class="level-item has-text-white">&copy2021 ellipsis, Inc.</p>
+            <p class="level-item"><a class="has-text-white">Условия использования</a></p>
+            <p class="level-item"><a class="has-text-white">Конфиденциальность</a></p>
+            <p class="level-item"><a class="has-text-white">Куки</a></p>
+            <p class="level-item"><a class="has-text-white">Реклама</a></p>
+        </div>
+    </footer>
+
+<script>
+    let tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+        manifestUrl: "https://pandusss.github.io/ton-manifest/tonconnect-manifest.json",
+        buttonRootId: 'ton-connect'
+    });
+
+    tonConnectUI.onStatusChange(async (walletInfo) => {
+        console.log("onStatusChange triggered!", walletInfo);
+        if (walletInfo && walletInfo.account?.address) {
+            // Не логинить повторно
+            if (sessionStorage.getItem("walletLoggedIn") === "true") return;
+
+            try {
+                const response = await fetch("/login_wallet", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ address: walletInfo.account.address })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    sessionStorage.setItem("walletLoggedIn", "true");
+                    window.location.reload();
+                }
+            } catch (err) {
+                console.error("Wallet login failed:", err);
+            }
+
+        } else {
+    console.log("Wallet disconnected!");
+
+    sessionStorage.removeItem("walletLoggedIn");
+
+    try {
+    const response = await fetch("/sign_out/");
+    console.log("Sign out response:", response.status);
+
+    if (response.ok) {
+        console.log("User session cleared on server.");
+        window.location.href = "/";
+    } else {
+        console.warn("Failed to clear session on server");
+    }
+    } catch (err) {
+        console.warn("sign_out failed:", err);
+    }
+
+}
+
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script>
+    const tagDropdown = new Choices('#tags', {
+        removeItemButton: true,
+        shouldSort: false,
+        searchEnabled: true,
+        placeholderValue: '',
+    });
+</script>
+
+
+</body>
+
+</html>
