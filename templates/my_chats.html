@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">Мои чаты</h2>
+
+    {% if chats %}
+      <div class="columns is-multiline">
+        {% for c in chats %}
+          <div class="column is-6">
+            <div class="card">
+              <div class="card-content">
+                <p class="title is-5 mb-2">{{ c.product.title }}</p>
+
+                <p class="is-size-6 mb-3">
+                  {% if c.buyer.user_id == current_user_id %}
+                    Продавец: <strong>{{ c.seller.full_name }}</strong>
+                  {% else %}
+                    Покупатель: <strong>{{ c.buyer.full_name }}</strong>
+                  {% endif %}
+                </p>
+
+                <a class="button is-link is-light is-rounded" href="{{ url_for('chat_view', chat_id=c.chat_id) }}">
+                  <span class="icon"><i class="fas fa-comments"></i></span>
+                  <span>Открыть чат</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="notification is-light has-text-centered">
+        <p>У вас пока нет чатов.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
