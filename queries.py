@@ -13,6 +13,15 @@ def get_user_by_wallet(wallet_address):
         return model_to_dict(user)
     except peewee.DoesNotExist:
         return False
+
+
+def get_user(username):
+    """Return user dict by username or wallet address."""
+    try:
+        user = User.get(User.wallet_address == username)
+        return model_to_dict(user)
+    except peewee.DoesNotExist:
+        return False
     
 def user_to_dict(user):
     return {
@@ -21,7 +30,9 @@ def user_to_dict(user):
         "full_name": user.full_name or "",
         "address": user.address or "",
         "bio": user.bio or "",
-        "avatar_url": user.avatar_url or ""
+        "avatar_url": user.avatar_url or "",
+        "rating_total": user.rating_total,
+        "rating_count": user.rating_count
     }
 
 

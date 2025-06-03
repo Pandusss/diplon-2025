@@ -460,7 +460,7 @@ def confirm_delivery(chat_id):
     chat.save()
 
 
-    return redirect(url_for("chat_view", chat_id=chat_id))
+    return redirect(url_for("rate_seller", deal_id=deal.deal_id))
 
 @app.route('/mark_shipped/<int:deal_id>', methods=['POST'])
 def mark_shipped(deal_id):
@@ -475,6 +475,39 @@ def mark_shipped(deal_id):
     deal.updated_at = datetime.now()
     deal.save()
     return redirect(request.referrer or url_for('seller_dashboard'))
+
+
+@app.route('/rate_seller/<int:deal_id>', methods=['GET', 'POST'])
+def rate_seller(deal_id):
+    if "user" not in session:
+        return redirect(url_for('login'))
+
+    deal = Deal.get_or_none(Deal.deal_id == deal_id)
+    if not deal:
+        abort(404)
+
+    if session["user"]["user_id"] != deal.chat.buyer.user_id:
+        abort(403)
+
+    seller = deal.chat.seller
+
+    if request.method == "POST":
+        try:
+            rating = int(request.form.get("rating", 0))
+        except ValueError:
+            rating = 0
+
+        if rating < 1 or rating > 5:
+            flash("Оценка должна быть от 1 до 5", "danger")
+            return redirect(url_for("rate_seller", deal_id=deal_id))
+
+        seller.rating_total += rating
+        seller.rating_count += 1
+        seller.save()
+        flash("Спасибо за вашу оценку!", "success")
+        return redirect(url_for("user_page", username=seller.wallet_address))
+
+    return render_template("rate_seller.html", seller=seller)
 
 @app.route('/my_chats/')
 def my_chats():
@@ -508,7 +541,9 @@ def login_wallet():
         "full_name": user.full_name or "",
         "address": user.address or "",
         "bio": user.bio or "",
-        "avatar_url": user.avatar_url or ""
+        "avatar_url": user.avatar_url or "",
+        "rating_total": user.rating_total,
+        "rating_count": user.rating_count
     }
 
     return jsonify({"success": True, "new_user": created})

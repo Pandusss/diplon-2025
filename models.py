@@ -36,6 +36,8 @@ class User(BaseModel):
     address = CharField(null=True)          # <== ОБЯЗАТЕЛЬНО
     bio = TextField(null=True)
     avatar_url = CharField(null=True)
+    rating_total = FloatField(default=0)
+    rating_count = IntegerField(default=0)
 
 
 
