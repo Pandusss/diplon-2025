@@ -30,6 +30,9 @@
                             ellipsis_user.username }}</h1>
                         <h2 class="subtitle mb-3">{{ ellipsis_user.bio }}</h2>
                         <p class="has-text-weight-light">{{ ellipsis_user.address }}</p>
+                        <p class="has-text-weight-light">Рейтинг: {{
+                            (ellipsis_user.rating_total / ellipsis_user.rating_count)|round(1) if ellipsis_user.rating_count else 0
+                        }} ({{ ellipsis_user.rating_count }})</p>
                     </div>
                 </div>
             </div>
