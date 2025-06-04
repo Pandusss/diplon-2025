@@ -505,7 +505,7 @@ def rate_seller(deal_id):
         seller.rating_count += 1
         seller.save()
         flash("Спасибо за вашу оценку!", "success")
-        return redirect(url_for("user_page", username=seller.wallet_address))
+        return redirect(url_for("frontpage"))
 
     return render_template("rate_seller.html", seller=seller)
 
