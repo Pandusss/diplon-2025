@@ -1,4 +1,5 @@
 import os
+import logging
 import queries
 from cart import Cart
 from create_fake_accounts import create_fake_db_accounts
@@ -19,6 +20,18 @@ from werkzeug.utils import secure_filename
 import uuid
 from dotenv import load_dotenv
 load_dotenv()
+
+
+# Configure dedicated application logger
+logger = logging.getLogger("application")
+logger.setLevel(logging.INFO)
+
+file_handler = logging.FileHandler("application.log")
+file_handler.setFormatter(
+    logging.Formatter("%(asctime)s %(levelname)s:%(message)s")
+)
+logger.addHandler(file_handler)
+logger.propagate = False
 
 
 app = Flask(__name__)
@@ -329,13 +342,21 @@ def view_cart():
             )
 
             # 🆕 создаём сделку и связываем с чатом
-            Deal.create(
+            deal = Deal.create(
                 chat=chat,
                 code=deal_code,  # используем тот же код
                 amount_ton=product.price_in_cents / 100,
                 status="awaiting_payment",
                 created_at=datetime.now(),
                 updated_at=datetime.now()
+            )
+            logger.info(
+                "Deal created: code=%s chat=%s buyer=%s seller=%s amount=%s",
+                deal_code,
+                chat.chat_id,
+                buyer["user_id"],
+                seller.user_id,
+                product.price_in_cents / 100,
             )
 
             return redirect(url_for('chat_view', chat_id=chat.chat_id))
@@ -393,6 +414,9 @@ def chat_view(chat_id):
                 content=content,
                 timestamp=datetime.now()
             )
+            logger.info(
+                "Chat message: chat=%s sender=%s", chat.chat_id, user["user_id"]
+            )
 
     messages = Message.select().where(Message.chat == chat).order_by(Message.timestamp)
     deal = Deal.get_or_none(Deal.chat == chat)  
@@ -413,6 +437,7 @@ def check_payment(chat_id):
         deal.status = "paid"
         deal.updated_at = datetime.now()
         deal.save()
+        logger.info("Deal %s marked as paid", deal.code)
         flash("✅ Оплата найдена в блокчейне", "success")
     else:
         flash("❌ Оплата не найдена. Попробуйте позже", "error")
@@ -444,20 +469,23 @@ def confirm_delivery(chat_id):
         deal.status = "finished"
         deal.updated_at = datetime.now()
         deal.save()
+        logger.info("Deal %s marked as finished", deal.code)
 
         flash(f"✅ Оплата продавцу завершена. Хеш транзакции: {tx_hash}", "success")
     except Exception as e:
         flash(f"Ошибка при переводе TON: {str(e)}", "danger")
 
         Message.create(
-    chat=chat,
-    sender=None,  # или None
-    content="СДЕЛКА УСПЕШНО ЗАВЕРШЕНА, ЧАТ ЗАКРЫТ",
-    is_system=True
-    )   
+            chat=chat,
+            sender=None,  # или None
+            content="СДЕЛКА УСПЕШНО ЗАВЕРШЕНА, ЧАТ ЗАКРЫТ",
+            is_system=True,
+        )
+        logger.info("System message in chat %s: deal finished", chat.chat_id)
 
     chat.is_active = False
     chat.save()
+    logger.info("Chat %s closed", chat.chat_id)
 
 
     return redirect(url_for("rate_seller", deal_id=deal.deal_id))
@@ -474,6 +502,7 @@ def mark_shipped(deal_id):
     deal.status = "shipped"
     deal.updated_at = datetime.now()
     deal.save()
+    logger.info("Deal %s marked as shipped", deal.code)
     return redirect(request.referrer or url_for('seller_dashboard'))
 
 
