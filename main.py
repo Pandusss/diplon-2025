@@ -39,6 +39,7 @@ file_handler.setFormatter(
 logger.addHandler(file_handler)
 logger.propagate = False
 
+logging.getLogger("werkzeug").setLevel(logging.WARNING)
 
 app = Flask(__name__)
 app.secret_key = os.urandom(16)
@@ -425,7 +426,7 @@ def chat_view(chat_id):
             
             logger.info(
 
-                "Chat message: chat=%s sender=%s", chat.chat_id, user["user_id"]
+                "Chat message: chat=%s sender=%s", chat.chat_id, user["full_name"]
             )
 
     messages = Message.select().where(Message.chat == chat).order_by(Message.timestamp)
