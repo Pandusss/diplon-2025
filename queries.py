@@ -2,6 +2,9 @@ __winc_id__ = "d7b474e9b3a54d23bca54879a4f1855b"
 __human_name__ = "ellipsis Webshop"
 
 import logging
+
+logger = logging.getLogger("application")
+
 import peewee
 from peewee import fn
 from flask import flash
@@ -52,7 +55,9 @@ def edit_user(user_id, name, address, bio, avatar_url):
             user.avatar_url = avatar_url
 
         user.save()
-        logging.info(
+
+        logger.info(
+
             "User profile updated: id=%s name=%s address=%s",
             user.user_id,
             user.full_name,
@@ -71,7 +76,9 @@ def add_product_to_catalog(product_info):
 
         product = Product.create(title=product_info["title"], description=product_info['description'],
                                  price_in_cents=product_info['price_in_cents'], qty=product_info['qty'], vendor=user)
-        logging.info(
+
+        logger.info(
+
             "Product added: id=%s title=%s vendor=%s",
             product.prod_id,
             product.title,
