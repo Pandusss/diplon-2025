@@ -21,6 +21,12 @@ import uuid
 from dotenv import load_dotenv
 load_dotenv()
 
+logging.basicConfig(
+    filename="application.log",
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s:%(message)s",
+)
+
 
 # Configure dedicated application logger
 logger = logging.getLogger("application")
@@ -350,7 +356,9 @@ def view_cart():
                 created_at=datetime.now(),
                 updated_at=datetime.now()
             )
+
             logger.info(
+
                 "Deal created: code=%s chat=%s buyer=%s seller=%s amount=%s",
                 deal_code,
                 chat.chat_id,
@@ -414,7 +422,9 @@ def chat_view(chat_id):
                 content=content,
                 timestamp=datetime.now()
             )
+            
             logger.info(
+
                 "Chat message: chat=%s sender=%s", chat.chat_id, user["user_id"]
             )
 
@@ -437,7 +447,9 @@ def check_payment(chat_id):
         deal.status = "paid"
         deal.updated_at = datetime.now()
         deal.save()
+
         logger.info("Deal %s marked as paid", deal.code)
+
         flash("✅ Оплата найдена в блокчейне", "success")
     else:
         flash("❌ Оплата не найдена. Попробуйте позже", "error")
@@ -469,7 +481,9 @@ def confirm_delivery(chat_id):
         deal.status = "finished"
         deal.updated_at = datetime.now()
         deal.save()
+
         logger.info("Deal %s marked as finished", deal.code)
+
 
         flash(f"✅ Оплата продавцу завершена. Хеш транзакции: {tx_hash}", "success")
     except Exception as e:
@@ -481,12 +495,12 @@ def confirm_delivery(chat_id):
             content="СДЕЛКА УСПЕШНО ЗАВЕРШЕНА, ЧАТ ЗАКРЫТ",
             is_system=True,
         )
+
         logger.info("System message in chat %s: deal finished", chat.chat_id)
 
     chat.is_active = False
     chat.save()
     logger.info("Chat %s closed", chat.chat_id)
-
 
     return redirect(url_for("rate_seller", deal_id=deal.deal_id))
 
@@ -502,7 +516,9 @@ def mark_shipped(deal_id):
     deal.status = "shipped"
     deal.updated_at = datetime.now()
     deal.save()
+
     logger.info("Deal %s marked as shipped", deal.code)
+
     return redirect(request.referrer or url_for('seller_dashboard'))
 
 

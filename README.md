@@ -3,7 +3,7 @@
 
 
 ## Description 
-A multi-vendor marketplace modeled after Etsy 
+A multi-vendor marketplace with blockchain
 
 ## Languages, Libraries & Frameworks
 * Python
@@ -23,15 +23,6 @@ A multi-vendor marketplace modeled after Etsy
 
 You should now see a 'ellipsis.db' file appear in the current directory. You can now view the application on http://127.0.0.1:5000/
 
-
-## Screenshots
-![alt text](preview_image/ellipsis_preview.png "ellipsis Preview image")
-
-
-## Video Demo 
-https://youtu.be/gcu0Do8sEho
-
-
 ## Usage & Details 
 A nearly identical copy of Etsy. This multivendor marketplace was built as practice for modelling and querying a database, as well as grasping how an ecommerce store may function on the backend. 
 
@@ -42,7 +33,3 @@ A nearly identical copy of Etsy. This multivendor marketplace was built as pract
 * As a user i'm able to edit or remove a product from my store
 * As a user i'm able to add, modify and remove products in my cart
 * As a user I receive a personal greeting whenever i log in
-
-
-## Credits
-Credit goes to [SteinOveHelset](https://github.com/SteinOveHelset), his tutorial "How to make a multi-vendor ecommerce store using Django" was of invaluable help for making ellipsis.
