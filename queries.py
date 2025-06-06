@@ -82,7 +82,7 @@ def add_product_to_catalog(product_info):
             "Product added: id=%s title=%s vendor=%s",
             product.prod_id,
             product.title,
-            user.user_id,
+            user.full_name,
         )
         return product.prod_id
     except peewee.PeeweeException:

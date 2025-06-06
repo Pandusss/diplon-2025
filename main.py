@@ -426,7 +426,10 @@ def chat_view(chat_id):
             
             logger.info(
 
-                "Chat message: chat=%s sender=%s", chat.chat_id, user["full_name"]
+                "Chat message: chat=%s sender=%s content=%s",
+                chat.chat_id,
+                user["full_name"],
+                content,
             )
 
     messages = Message.select().where(Message.chat == chat).order_by(Message.timestamp)
