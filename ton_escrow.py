@@ -1,11 +1,9 @@
-# ton_send.py
 import asyncio
 from tonutils.client import ToncenterV3Client
 from tonutils.wallet import WalletV5R1
 import os
 from dotenv import load_dotenv
 
-# ⚙️ Настройки
 load_dotenv("local.env")
 
 IS_TESTNET = False  # True — тестнет, False — мейннет
