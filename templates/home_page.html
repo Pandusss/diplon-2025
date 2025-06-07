@@ -105,11 +105,14 @@
 
                     <!-- Город и дата (можно удалить или заменить) -->
 
-                    <p class="is-size-7 has-text-grey mb-2"><br>Добавлено: {{product.date_added}}
+                    <p class="is-size-7 has-text-grey mb-2">
+                        <br>Добавлено: {{product.date_added}}
                         <br>Продавец:
                         <a href="{{ url_for('user_page', username=product.vendor.username) }}">
                              {{ product.vendor.full_name or product.vendor.username }}
                         </a>
+                        <br>Рейтинг продавца:
+                        {{ (product.vendor.rating_total / product.vendor.rating_count)|round(1) if product.vendor.rating_count else 0 }} ({{ product.vendor.rating_count }})
                     </p>
 
                     <!-- Метки (по желанию) -->
