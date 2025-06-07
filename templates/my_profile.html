@@ -30,10 +30,10 @@
             <!-- Информация -->
             <div class="column is-8-desktop is-12-mobile">
             <h1 class="title is-4 has-text-weight-semibold">{{ user.full_name }}</h1>
-            <p class="is-size-6 has-text-grey">
-                <i class="fas fa-map-marker-alt"></i> {{ user.address }}
+            <p>
+                Адрес кошелька: {{ user.wallet_address }}
             </p>
-            <p class="mt-2">{{ user.bio }}</p>
+            <p>{{ user.bio }}</p>
             <p>Рейтинг: {{ (user.rating_total / user.rating_count)|round(1) if user.rating_count else 0 }} ({{ user.rating_count }})</p>
             </div>
 

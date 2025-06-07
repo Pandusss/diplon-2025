@@ -93,7 +93,6 @@ def edit_profile():
 
     if request.method == "POST":
         name = request.form.get("full_name", "")
-        address = request.form.get("address", "")
         bio = request.form.get("bio", "")
 
         # Получаем загруженный файл
@@ -112,7 +111,7 @@ def edit_profile():
 
         # Сохраняем в базу
         updated_user = queries.edit_user(
-            user["user_id"], name, address, bio, avatar_url
+            user["user_id"], name, bio, avatar_url
         )
 
         if updated_user:
