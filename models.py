@@ -39,7 +39,9 @@ class User(BaseModel):
     rating_total = FloatField(default=0)
     rating_count = IntegerField(default=0)
 
-
+class Tag(BaseModel):
+    tag_id = AutoField()
+    name = CharField(max_length=50, unique=True)
 
 class Product(BaseModel):
     prod_id = AutoField()
@@ -50,6 +52,7 @@ class Product(BaseModel):
     description = TextField(null=True)
     thumbnail = CharField(null=True)
     date_added = DateField(default=date.today())
+    tags = ManyToManyField(Tag, backref='products', on_delete='CASCADE')
 
 
 class Transaction(BaseModel):   
@@ -75,11 +78,6 @@ class ProductImage(BaseModel):
     img_id = AutoField()
     product = ForeignKeyField(Product, backref='images', on_delete='CASCADE')
     image_url = CharField()
-
-
-class Tag(BaseModel):
-    name = CharField(max_length=50, unique=True)
-    products = ManyToManyField(Product, backref='tags', on_delete='CASCADE')
 
 
 class Chat(BaseModel):
@@ -110,7 +108,7 @@ class Deal(BaseModel):
     updated_at = DateTimeField(default=datetime.now)
 
 
-ProductTag = Tag.products.get_through_model()
+ProductTag = Product.tags.get_through_model()
 
 
 def create_tables():
